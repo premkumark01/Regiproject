@@ -1,62 +1,131 @@
 <h1>Registration Form</h1>
 
-<form (ngSubmit)="onSubmit(theForm)" #theForm="ngForm">
+<form name="user" (ngSubmit)="user.valid && onSubmit()" [formGroup]="user">
   
   <div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" ngModel name="mname" class="form-control" id="name" placeholder="Enter name">
+    <label for="mname">Name</label>
+    <input type="text" formControlName="mname" class="form-control" id="mname" [ngClass]="{'is-invalid':
+    user.get('mname').touched && user.get('mname').invalid}" placeholder="Enter name">
+    <div *ngIf="user.get('mname').touched && user.get('mname').invalid" class="invalid-feedback">
+      <div *ngIf="user.get('mname').errors.required">Name is Required</div>
+      <div *ngIf="user.get('mname').errors.minlength">Name must be minimum 3 charactors</div>
+      <div *ngIf="user.get('mname').errors.maxlength">Name must be maximum 20 charactors</div>
+      <div *ngIf="user.get('mname').errors.pattern">Name must be alphabets </div>
+      </div>
   </div>
   <div class="form-group">
     <label for="username">User Name</label>
-    <input type="text" ngModel name="username" class="form-control" id="username" placeholder="Enter user name">
+    <input type="text" formControlName="username" class="form-control" id="username" [ngClass]="{'is-invalid':
+    user.get('username').touched && user.get('username').invalid}" placeholder="Enter user name">
+    <div *ngIf="user.get('username').touched && user.get('username').invalid" class="invalid-feedback">
+      <div *ngIf="user.get('username').errors.required">Username is Required</div>
+      <div *ngIf="user.get('username').errors.minlength">Username must be minimum 3 charactors</div>
+      <div *ngIf="user.get('username').errors.maxlength">Username must be maximum 10 charactors</div>
+      <div *ngIf="user.get('username').errors.pattern">Username must be alphabets </div>
+      </div>
   </div>
   <div class="form-group">
     <label for="email">Email address</label>
-    <input type="email" ngModel name="email" class="form-control" id="email"  placeholder="Enter email">
+    <input type="email" formControlName="email" class="form-control" id="email"  [ngClass]="{'is-invalid':
+    user.get('email').touched && user.get('email').invalid}" placeholder="Enter email">
+    <div *ngIf="user.get('email').touched && user.get('email').invalid" class="invalid-feedback">
+      <div *ngIf="user.get('email').errors.required">Email is Required</div>
+      <div *ngIf="user.get('email').errors.email">Email must be a valid email address</div>
+      </div>
   </div>
   <div class="form-group">
     <label for="street">Street</label>
-    <input type="text" ngModel name="street" class="form-control" id="street" placeholder="Enter street">
+    <input type="text" formControlName="street" class="form-control" id="street" [ngClass]="{'is-invalid':
+    user.get('street').touched && user.get('street').invalid}" placeholder="Enter street">
+    <div *ngIf="user.get('street').touched && user.get('street').invalid" class="invalid-feedback">
+      <div *ngIf="user.get('street').errors.required">Street Name is Required</div>
+      <div *ngIf="user.get('street').errors.minlength">Street Name be atleast 3 charactors</div>
+      <div *ngIf="user.get('street').errors.maxlength">Street Name must be atleast 20 charactors</div>
+      <div *ngIf="user.get('street').errors.pattern">Street Name must be alphabets </div>
+      </div>
   </div>
   <div class="form-group">
     <label for="suite">Suite</label>
-    <input type="text" ngModel name="suite" class="form-control" id="suite" placeholder="Enter suit">
+    <input type="text" formControlName="suite" class="form-control" id="suite" [ngClass]="{'is-invalid':
+    user.get('suite').touched && user.get('suite').invalid}" placeholder="Enter suit">
+    <div class="invalid-feedback">
+      <div>Suitename is Required</div>
+      </div>
   </div>
-  <div class="city">
-    <label for="exampleInputEmail1">City</label>
-    <input type="text" ngModel name="city" class="form-control" id="city" placeholder="Enter city">
+  <div class="form-group">
+    <label for="city">City</label>
+    <input type="text" formControlName="city" class="form-control" id="city" [ngClass]="{'is-invalid':
+    user.get('city').touched && user.get('city').invalid}" placeholder="Enter city">
+    <div *ngIf="user.get('city').touched && user.get('city').invalid" class="invalid-feedback">
+      <div *ngIf="user.get('city').errors.required">City Name is Required</div>
+      <div *ngIf="user.get('city').errors.minlength">City Name be atleast 3 charactors</div>
+      <div *ngIf="user.get('city').errors.maxlength">City Name must be atleast 10 charactors</div>
+      <div *ngIf="user.get('city').errors.pattern">City Name must be alphabets </div>
+      </div>
   </div>
   <div class="form-group">
     <label for="zipcode">Zipcode</label>
-    <input type="text" ngModel name="zipcode" class="form-control" id="zipcode" placeholder="Enter zipcode">
+    <input type="text" formControlName="zipcode" class="form-control" id="zipcode" [ngClass]="{'is-invalid':
+    user.get('zipcode').touched && user.get('zipcode').invalid}" placeholder="Enter zipcode">
+    <div class="invalid-feedback">
+      <div>Zipcode is Required</div>
+      </div>
   </div>
   <div class="form-group">
     <label for="lat">Latitude</label>
-    <input type="text" ngModel name="lat" class="form-control" id="lat" placeholder="Enter latitude">
+    <input type="text" formControlName="lat" class="form-control" id="lat" [ngClass]="{'is-invalid':
+    user.get('lat').touched && user.get('lat').invalid}" placeholder="Enter latitude">
+    <div class="invalid-feedback">
+      <div>Latitude is Required</div>
+      </div>
   </div>
   <div class="form-group">
     <label for="lng">Longitude</label>
-    <input type="text" ngModel name="lng" class="form-control" id="lng" placeholder="Enter longitude">
+    <input type="text" formControlName="lng" class="form-control" id="lng" [ngClass]="{'is-invalid':
+    user.get('lng').touched && user.get('lng').invalid}" placeholder="Enter longitude">
+    <div class="invalid-feedback">
+      <div>Longitude is Required</div>
+      </div>
   </div>
   <div class="form-group">
     <label for="phone">Phone</label>
-    <input type="text" ngModel name="phone" class="form-control" id="phone" placeholder="Enter phone">
+    <input type="text" formControlName="phone" class="form-control" id="phone" [ngClass]="{'is-invalid':
+    user.get('phone').touched && user.get('phone').invalid}" placeholder="Enter phone">
+    <div class="invalid-feedback">
+      <div>Phonenumber is Required</div>
+      </div>
   </div>
   <div class="form-group">
     <label for="website">website</label>
-    <input type="text" ngModel name="website" class="form-control" id="website" placeholder="Enter website">
+    <input type="text"  formControlName="website" class="form-control" id="website" [ngClass]="{'is-invalid':
+    user.get('website').touched && user.get('website').invalid}" placeholder="Enter website">
+    <div class="invalid-feedback">
+      <div>Website is Required</div>
+      </div>
   </div>
   <div class="form-group">
     <label for="cname">Company name</label>
-    <input type="text" ngModel name="cname" class="form-control" id="cname" placeholder="Enter company name">
+    <input type="text" formControlName="cname" class="form-control" id="cname" [ngClass]="{'is-invalid':
+    user.get('cname').touched && user.get('cname').invalid}" placeholder="Enter company name">
+    <div class="invalid-feedback">
+      <div>Company Name is Required</div>
+      </div>
   </div>
   <div class="form-group">
     <label for="catchphrase">Catchphrase</label>
-    <input type="text" ngModel name="catchphrase" class="form-control" id="catchphrase" placeholder="Enter catchphrase">
+    <input type="text" formControlName="catchphrase" class="form-control" id="catchphrase" [ngClass]="{'is-invalid':
+    user.get('catchphrase').touched && user.get('catchphrase').invalid}" placeholder="Enter catchphrase">
+    <div class="invalid-feedback">
+      <div>Catchphrase is Required</div>
+      </div>
   </div>
   <div class="form-group">
     <label for="bs">Bs</label>
-    <input type="text" ngModel name="bs" class="form-control" id="bs" placeholder="Enter bs">
+    <input type="text" formControlName="bs" class="form-control" id="bs" [ngClass]="{'is-invalid':
+    user.get('bs').touched && user.get('bs').invalid}" placeholder="Enter bs">
+    <div class="invalid-feedback">
+      <div>Bs is Required</div>
+      </div>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!user.valid">Submit</button>
 </form>

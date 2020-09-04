@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { NgForm,FormGroup,FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -7,49 +7,35 @@ import { NgForm } from '@angular/forms';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  user = {
-    id:0,
-    name:'',
-    username:'',
-    email:'',
-    address:{
-      street:'',
-      suite:'',
-      city:'',
-      zipcode:'',
-      geo:{
-        lat:'',
-        lng:''
-      }
-    },
-    phone:'',
-    website:'',
-    company:{
-      name:'',
-      catchPhrase:'',
-      bs:''
-    }
-  }
+export class AppComponent implements OnInit{
+    
+  
+  user=new FormGroup({
+    mname:new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(20),Validators.pattern("[a-zA-Z ]*")]),
+    username:new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(10),Validators.pattern("[a-zA-Z ]*")]),
+    email:new FormControl('',[Validators.required,Validators.email]),
+    street:new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(10),Validators.pattern("[a-zA-Z ]*")]),
+    suite:new FormControl('',Validators.required),
+    city:new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(10),Validators.pattern("[a-zA-Z ]*")]),
+    zipcode:new FormControl('',Validators.required),
+    lat:new FormControl('',Validators.required),
+    lng:new FormControl('',Validators.required),
+    phone:new FormControl('',Validators.required),
+    website:new FormControl('',Validators.required),
+    cname:new FormControl('',Validators.required),
+    catchphrase:new FormControl('',Validators.required),
+    bs:new FormControl('',Validators.required)
+}
+)
 
-  onSubmit(theForm: NgForm)
+
+  ngOnInit()
+{
+
+}
+
+  onSubmit()
   {
-    this.user.id=this.user.id+1;
-    this.user.name=theForm.value.mname;
-    this.user.username=theForm.value.username;
-    this.user.email=theForm.value.email;
-    this.user.address.street=theForm.value.street;
-    this.user.address.suite=theForm.value.suite;
-    this.user.address.city=theForm.value.city;
-    this.user.address.zipcode=theForm.value.zipcode;
-    this.user.address.geo.lat=theForm.value.lat;
-    this.user.address.geo.lng=theForm.value.lng;
-    this.user.phone=theForm.value.phone;
-    this.user.website=theForm.value.website;
-    this.user.company.name=theForm.value.cname;
-    this.user.company.catchPhrase=theForm.value.catchphrase;
-    this.user.company.bs=theForm.value.bs;
-
-    console.log(this.user);
+    alert(JSON.stringify(this.user.value))
   }
 }
